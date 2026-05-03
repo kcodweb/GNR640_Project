@@ -527,7 +527,6 @@ def compare_with_era5(pred_grid, era5_grid):
     corr = np.corrcoef(pred[mask], true[mask])[0, 1]
     return float(rmse), float(corr)
 
-
 def compare_variable_with_era5(var_name, data, stations, grid, best_model, era5_cache, lats, lons):
     era5_da = build_era5_grid_for_variable(var_name, era5_cache, lats, lons)
     if era5_da is None:
@@ -558,6 +557,10 @@ def compare_variable_with_era5(var_name, data, stations, grid, best_model, era5_
             pred_flat = fn(xy, values, grid_xy)
         except Exception:
             pred_flat = idw_predict(xy, values, grid_xy)
+
+        # Convert predicted temperature fields to Celsius to match ERA5
+        if var_name in ["Air temperature", "Soil temperature"]:
+            pred_flat = pred_flat - 273.15
 
         pred_grid = pred_flat.reshape(len(lats), len(lons))
         era5_grid = era5_da.sel(time=np.datetime64(date), method="nearest").values
@@ -594,7 +597,6 @@ def compare_variable_with_era5(var_name, data, stations, grid, best_model, era5_
             example_plotted = True
 
     return pd.DataFrame(rows)
-
 
 def main():
     ensure_dirs()
