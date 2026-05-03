@@ -1,0 +1,15 @@
+{
+  "domain": "CONUS",
+  "grid_resolution_degrees": 2.0,
+  "n_stations_used": 208,
+  "n_grid_cells": 420,
+  "evaluation": "5-fold station cross-validation; ERA5 comparison included when matching files are present",
+  "variables": [
+    "Air temperature",
+    "Precipitation",
+    "Relative humidity",
+    "Soil moisture 10cm",
+    "Soil temperature"
+  ],
+  "era5_year": "2015"
+}
