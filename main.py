@@ -280,6 +280,7 @@ def plot_model_metrics(metrics):
     if metrics.empty:
         return
     avg = metrics.groupby(["variable", "model"], as_index=False)[["rmse", "correlation"]].mean()
+    avg = avg[avg["model"] != "Kriging gaussian"]
     for measure in ["rmse", "correlation"]:
         pivot = avg.pivot(index="variable", columns="model", values=measure)
         ax = pivot.plot(kind="bar", figsize=(10, 5))
@@ -290,7 +291,6 @@ def plot_model_metrics(metrics):
         plt.tight_layout()
         plt.savefig(FIG / f"model_{measure}.png", dpi=180)
         plt.close()
-
 
 def plot_seasonality(seasonal_long):
     if seasonal_long.empty:
