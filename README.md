@@ -1,6 +1,6 @@
-# Geospatial Interpolation of Climate Variables (CONUS)
+# Geospatial Interpolation of Climate Variables
 
-This project generates gridded climate datasets over the contiguous United States (CONUS) using station-based observations from the USCRN network and evaluates interpolation methods against ERA5 reanalysis data.
+This project generates gridded climate datasets over the contiguous United States using station-based observations from the USCRN network and evaluates interpolation methods against ERA5 reanalysis data.
 
 ---
 
